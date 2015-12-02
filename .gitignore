@@ -1,0 +1,5 @@
+/SourceFiles/*
+!/SourceFiles/README.txt
+seec.msi
+seec.wixobj
+seec.wixpdb

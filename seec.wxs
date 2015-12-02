@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="6346AF71-8064-4331-8DE5-1EB28049F569"
+    UpgradeCode="07BB4000-1929-4329-ABDC-56AB3B07753A"
+    Version="0.26.0" Language="1033"
+    Name="SeeC" Manufacturer="Matthew Heinsen Egan">
+    
+    <Package Id="*" Keywords="Installer"
+      Description="SeeC 0.26 Installer"
+      Manufacturer="Matthew Heinsen Egan"
+      InstallerVersion="300"
+      Languages="1033"
+      Compressed="yes"
+      SummaryCodepage="1252" />
+
+    <Media Id="1" Cabinet="SeeC.cab" EmbedCab="yes" DiskPrompt="Disk #1" />
+    <Property Id="DiskPrompt" Value="SeeC 0.26 Installation [1]" />
+    
+    <!-- directory structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="PFiles">
+        <Directory Id="Company" Name="SeeC">
+          <Directory Id="APPLICATIONROOTDIRECTORY" Name="SeeC">
+            <Directory Id="DIRECTORYBIN" Name="bin" />
+            <Directory Id="DIRECTORYLIB" Name="lib">
+              <Directory Id="DIRECTORYLIBSEEC" Name="seec">
+                <Directory Id="DIRECTORYLIBSEECRESOURCES" Name="resources">
+                  <Directory Id="DIRECTORYLIBSEECRESOURCESCLANG" Name="clang">
+                    <Directory Id="DIRECTORYLIBSEECRESOURCESCLANGVER" Name="3.7.0">
+                      <Directory Id="DIRECTORYLIBSEECRESOURCESCLANGVERINCLUDE" Name="include" />
+                    </Directory>
+                  </Directory>
+                </Directory>
+              </Directory>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+      
+      <!-- program menu folder -->
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="SeeC">
+          <Component Id="ProgramMenuDir" Guid="677B029B-489A-4679-BEEF-7C46754F7CF9">
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\SeeC\SeeC' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <!-- files -->
+    <DirectoryRef Id="DIRECTORYBIN">
+      <Component Id="seec_cc.exe" Guid="CCAA0663-E55C-4934-8235-E81E2481F6C2">
+        <File Id="seec_cc.exe" Name="seec-cc.exe" DiskId="1" Source="SourceFiles\bin\seec-cc.exe" KeyPath="yes" Checksum="yes" />
+      </Component>
+      
+      <Component Id="seec_ld.exe" Guid="">
+        <File Id="seec_ld.exe" Name="seec-ld.exe" DiskId="1" Source="SourceFiles\bin\seec-ld.exe" KeyPath="yes" Checksum="yes" />
+      </Component>
+      
+      <Component Id="seec_view.exe" Guid="4944435C-B84E-4BFC-B148-C6B6AE5A72A5">
+        <File Id="seec_view.exe" Name="seec-view.exe" DiskId="1" Source="SourceFiles\bin\seec-view.exe" KeyPath="yes" Checksum="yes" />
+        <Shortcut Id="StartMenuSeeCView" Directory="ProgramMenuDir" Name="SeeC 0.26"
+          WorkingDirectory="DIRECTORYBIN"
+          Icon="seec.ico"
+          IconIndex="0"
+          Advertise="yes" />
+        <!-- 
+        <Shortcut Id="DesktopSeeCView" Directory="DesktopFolder" Name="SeeC 0.26"
+          WorkingDirectory="DIRECTORYBIN"
+          Icon="seec.ico"
+          IconIndex="0"
+          Advertise="yes" />
+        -->
+        <ProgId Id="SeeC.seecfile" Description="SeeC trace file" Icon="seec_view.exe">
+          <Extension Id="seec" ContentType="application/seec">
+            <Verb Id="open" Command="Open" TargetFile="seec_view.exe" Argument='"%1"' />
+          </Extension>
+        </ProgId>
+      </Component>
+      
+      <Component Id="libcurl_4.dll" Guid="FD5771A7-E5E5-4928-9033-DFC00EC62B2D"><File Id="libcurl_4.dll" Name="libcurl-4.dll" DiskId="1" Source="SourceFiles\bin\libcurl-4.dll" KeyPath="yes" /></Component>
+      <Component Id="LIBEAY32.dll" Guid="771FAB66-79FC-4121-B736-B78A871CD812"><File Id="LIBEAY32.dll" Name="LIBEAY32.dll" DiskId="1" Source="SourceFiles\bin\LIBEAY32.dll" KeyPath="yes" /></Component>
+      <Component Id="libexpat_1.dll" Guid="5CC4423E-B789-48B0-B6DE-5F85E183A730"><File Id="libexpat_1.dll" Name="libexpat-1.dll" DiskId="1" Source="SourceFiles\bin\libexpat-1.dll" KeyPath="yes" /></Component>
+      <Component Id="libffi_6.dll" Guid="1FB5A89F-2F06-461F-84E2-35DACBEEF46B"><File Id="libffi_6.dll" Name="libffi-6.dll" DiskId="1" Source="SourceFiles\bin\libffi-6.dll" KeyPath="yes" /></Component>
+      <Component Id="libgcc_s_seh_1.dll" Guid="B6F12663-0CAF-4C34-A18C-2FF292528A82"><File Id="libgcc_s_seh_1.dll" Name="libgcc_s_seh-1.dll" DiskId="1" Source="SourceFiles\bin\libgcc_s_seh-1.dll" KeyPath="yes" /></Component>
+      <Component Id="libgmp_10.dll" Guid="79DCA6F9-8470-434F-8201-B8EB797C9499"><File Id="libgmp_10.dll" Name="libgmp-10.dll" DiskId="1" Source="SourceFiles\bin\libgmp-10.dll" KeyPath="yes" /></Component>
+      <Component Id="libgnutls_30.dll" Guid="AB414C48-23BD-4206-928F-7E56B28E8A30"><File Id="libgnutls_30.dll" Name="libgnutls-30.dll" DiskId="1" Source="SourceFiles\bin\libgnutls-30.dll" KeyPath="yes" /></Component>
+      <Component Id="libhogweed_4_0.dll" Guid="96CDC0EA-14D6-4989-A6A2-C65A77A809D4"><File Id="libhogweed_4_0.dll" Name="libhogweed-4-0.dll" DiskId="1" Source="SourceFiles\bin\libhogweed-4-0.dll" KeyPath="yes" /></Component>
+      <Component Id="libiconv_2.dll" Guid="0402FA2E-6135-403D-83E6-4AEA3D163951"><File Id="libiconv_2.dll" Name="libiconv-2.dll" DiskId="1" Source="SourceFiles\bin\libiconv-2.dll" KeyPath="yes" /></Component>
+      <Component Id="libicudt55.dll" Guid="769BC8A6-0A67-4091-AD93-5E63CF57C96C"><File Id="libicudt55.dll" Name="libicudt55.dll" DiskId="1" Source="SourceFiles\bin\libicudt55.dll" KeyPath="yes" /></Component>
+      <Component Id="libicuin55.dll" Guid="BE3257D3-F512-4DBA-9F94-761AC3D7C8AD"><File Id="libicuin55.dll" Name="libicuin55.dll" DiskId="1" Source="SourceFiles\bin\libicuin55.dll" KeyPath="yes" /></Component>
+      <Component Id="libicuuc55.dll" Guid="5C8D0508-30DB-4759-BC45-8E2A9A215BCF"><File Id="libicuuc55.dll" Name="libicuuc55.dll" DiskId="1" Source="SourceFiles\bin\libicuuc55.dll" KeyPath="yes" /></Component>
+      <Component Id="libidn_11.dll" Guid="4FFEEF6A-52C7-480B-B704-B296A162543B"><File Id="libidn_11.dll" Name="libidn-11.dll" DiskId="1" Source="SourceFiles\bin\libidn-11.dll" KeyPath="yes" /></Component>
+      <Component Id="libintl_8.dll" Guid="91A0ADEB-1C29-43B8-B124-1041CB3DE85D"><File Id="libintl_8.dll" Name="libintl-8.dll" DiskId="1" Source="SourceFiles\bin\libintl-8.dll" KeyPath="yes" /></Component>
+      <Component Id="libnettle_6_0.dll" Guid="E6EFF209-E536-452C-A0B9-E31048ACD821"><File Id="libnettle_6_0.dll" Name="libnettle-6-0.dll" DiskId="1" Source="SourceFiles\bin\libnettle-6-0.dll" KeyPath="yes" /></Component>
+      <Component Id="libp11_kit_0.dll" Guid="E5B7CAC5-38C1-4F51-9D25-7F4895EA067B"><File Id="libp11_kit_0.dll" Name="libp11-kit-0.dll" DiskId="1" Source="SourceFiles\bin\libp11-kit-0.dll" KeyPath="yes" /></Component>
+      <Component Id="librtmp_1.dll" Guid="D248DA4F-BD16-4A32-A1EC-BD1A576A0149"><File Id="librtmp_1.dll" Name="librtmp-1.dll" DiskId="1" Source="SourceFiles\bin\librtmp-1.dll" KeyPath="yes" /></Component>
+      <Component Id="libseecRuntimeTracer.dll" Guid="9E33B05C-BDD5-42C9-B047-993BB9541391"><File Id="libseecRuntimeTracer.dll" Name="libseecRuntimeTracer.dll" DiskId="1" Source="SourceFiles\bin\libseecRuntimeTracer.dll" KeyPath="yes" /></Component>
+      <Component Id="libssh2_1.dll" Guid="ED3ECFF2-2F11-4DB1-9BD6-B24B03F9D003"><File Id="libssh2_1.dll" Name="libssh2-1.dll" DiskId="1" Source="SourceFiles\bin\libssh2-1.dll" KeyPath="yes" /></Component>
+      <Component Id="libstdc___6.dll" Guid="41E54692-8205-4CB4-BFBF-85C16697C78A"><File Id="libstdc___6.dll" Name="libstdc++-6.dll" DiskId="1" Source="SourceFiles\bin\libstdc++-6.dll" KeyPath="yes" /></Component>
+      <Component Id="libtasn1_6.dll" Guid="EDEA5589-1F50-4C8C-A93E-6CA8EE7FD95B"><File Id="libtasn1_6.dll" Name="libtasn1-6.dll" DiskId="1" Source="SourceFiles\bin\libtasn1-6.dll" KeyPath="yes" /></Component>
+      <Component Id="libwinpthread_1.dll" Guid="38265F8C-1BB8-4E49-A63B-8A0C31E8DC6B"><File Id="libwinpthread_1.dll" Name="libwinpthread-1.dll" DiskId="1" Source="SourceFiles\bin\libwinpthread-1.dll" KeyPath="yes" /></Component>
+      <Component Id="SSLEAY32.dll" Guid="E64FEAD7-E5ED-4E9D-A44A-304DEF8BF6DF"><File Id="SSLEAY32.dll" Name="SSLEAY32.dll" DiskId="1" Source="SourceFiles\bin\SSLEAY32.dll" KeyPath="yes" /></Component>
+      <Component Id="zlib1.dll" Guid="5FE3E57D-8248-4D47-940B-49AE10979F15"><File Id="zlib1.dll" Name="zlib1.dll" DiskId="1" Source="SourceFiles\bin\zlib1.dll" KeyPath="yes" /></Component>
+    </DirectoryRef>
+    
+    <!-- SeeC's ICU data -->
+    <DirectoryRef Id="DIRECTORYLIBSEECRESOURCES">
+      <Component Id="ClangEPV.dat" Guid="88C8C4AF-FE2B-497A-88BF-26A429AB993A"><File Id="ClangEPV.dat" Name="ClangEPV.dat" DiskId="1" Source="SourceFiles\lib\seec\resources\ClangEPV.dat" KeyPath="yes" /></Component>
+      <Component Id="RuntimeErrors.dat" Guid="5226FD1F-B354-41AE-B238-901C429E43F6"><File Id="RuntimeErrors.dat" Name="RuntimeErrors.dat" DiskId="1" Source="SourceFiles\lib\seec\resources\RuntimeErrors.dat" KeyPath="yes" /></Component>
+      <Component Id="SeeCClang.dat" Guid="3FCA95DE-3028-48E9-879E-BC3B3CBFB8FD"><File Id="SeeCClang.dat" Name="SeeCClang.dat" DiskId="1" Source="SourceFiles\lib\seec\resources\SeeCClang.dat" KeyPath="yes" /></Component>
+      <Component Id="Trace.dat" Guid="939CC25B-773B-45F9-9129-D09BDE1BEFD9"><File Id="Trace.dat" Name="Trace.dat" DiskId="1" Source="SourceFiles\lib\seec\resources\Trace.dat" KeyPath="yes" /></Component>
+      <Component Id="TraceViewer.dat" Guid="19B2002F-D835-4529-B104-BDA373C790C2"><File Id="TraceViewer.dat" Name="TraceViewer.dat" DiskId="1" Source="SourceFiles\lib\seec\resources\TraceViewer.dat" KeyPath="yes" /></Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="DIRECTORYLIBSEECRESOURCESCLANGVERINCLUDE">
+      <Component Id="__stddef_max_align_t.h" Guid="02313281-7D33-4E21-86AD-DFBD6FD4FD67"><File Id="__stddef_max_align_t.h" Name="__stddef_max_align_t.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\__stddef_max_align_t.h" KeyPath="yes" /></Component>
+      <Component Id="__wmmintrin_aes.h" Guid="5CFD2CC3-EEC7-4850-85DB-4CF616957521"><File Id="__wmmintrin_aes.h" Name="__wmmintrin_aes.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\__wmmintrin_aes.h" KeyPath="yes" /></Component>
+      <Component Id="__wmmintrin_pclmul.h" Guid="68A484B9-7FC1-46E0-A867-9FA47A2179F8"><File Id="__wmmintrin_pclmul.h" Name="__wmmintrin_pclmul.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\__wmmintrin_pclmul.h" KeyPath="yes" /></Component>
+      <Component Id="adxintrin.h" Guid="EA4EFB65-C5D7-44CA-83D0-C0077CB9C1D3"><File Id="adxintrin.h" Name="adxintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\adxintrin.h" KeyPath="yes" /></Component>
+      <Component Id="altivec.h" Guid="B5FCB79C-723D-416E-AA7A-B245C8E3F52D"><File Id="altivec.h" Name="altivec.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\altivec.h" KeyPath="yes" /></Component>
+      <Component Id="ammintrin.h" Guid="ECCC8850-5B37-4864-B139-F85FA029280E"><File Id="ammintrin.h" Name="ammintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\ammintrin.h" KeyPath="yes" /></Component>
+      <Component Id="arm_acle.h" Guid="3F1C8349-8526-4592-9B82-0C1F40015548"><File Id="arm_acle.h" Name="arm_acle.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\arm_acle.h" KeyPath="yes" /></Component>
+      <Component Id="arm_neon.h" Guid="F6BB58E7-49F9-4110-B39D-703EE6DC17A7"><File Id="arm_neon.h" Name="arm_neon.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\arm_neon.h" KeyPath="yes" /></Component>
+      <Component Id="avx2intrin.h" Guid="8E5EBC1B-8125-4E25-A4BD-7A2CB25EB609"><File Id="avx2intrin.h" Name="avx2intrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avx2intrin.h" KeyPath="yes" /></Component>
+      <Component Id="avx512bwintrin.h" Guid="5BE4B8A5-1DB9-46E9-9251-B94AC746711D"><File Id="avx512bwintrin.h" Name="avx512bwintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avx512bwintrin.h" KeyPath="yes" /></Component>
+      <Component Id="avx512cdintrin.h" Guid="42AEDEC6-9BEA-4DD9-ADD0-074B729B3ED0"><File Id="avx512cdintrin.h" Name="avx512cdintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avx512cdintrin.h" KeyPath="yes" /></Component>
+      <Component Id="avx512dqintrin.h" Guid="94A6628C-6B48-4053-BD95-2B415C42E670"><File Id="avx512dqintrin.h" Name="avx512dqintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avx512dqintrin.h" KeyPath="yes" /></Component>
+      <Component Id="avx512erintrin.h" Guid="1274CA01-D252-48D2-8F79-F6B2B0F49893"><File Id="avx512erintrin.h" Name="avx512erintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avx512erintrin.h" KeyPath="yes" /></Component>
+      <Component Id="avx512fintrin.h" Guid="C1FD7F6A-FA18-470C-BAF0-56578E499C95"><File Id="avx512fintrin.h" Name="avx512fintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avx512fintrin.h" KeyPath="yes" /></Component>
+      <Component Id="avx512vlbwintrin.h" Guid="B4437FAE-BB8C-4801-9029-17535C7EB892"><File Id="avx512vlbwintrin.h" Name="avx512vlbwintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avx512vlbwintrin.h" KeyPath="yes" /></Component>
+      <Component Id="avx512vldqintrin.h" Guid="9AF4EF8C-D8CE-4649-815E-C994007DE3A6"><File Id="avx512vldqintrin.h" Name="avx512vldqintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avx512vldqintrin.h" KeyPath="yes" /></Component>
+      <Component Id="avx512vlintrin.h" Guid="B65D3D18-E44D-443D-9B00-52C050621119"><File Id="avx512vlintrin.h" Name="avx512vlintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avx512vlintrin.h" KeyPath="yes" /></Component>
+      <Component Id="avxintrin.h" Guid="AB49FC2B-97E2-4034-B3C4-0D67622B7A15"><File Id="avxintrin.h" Name="avxintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\avxintrin.h" KeyPath="yes" /></Component>
+      <Component Id="bmi2intrin.h" Guid="2F4BAA44-879C-4CE2-8C21-4593FA442309"><File Id="bmi2intrin.h" Name="bmi2intrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\bmi2intrin.h" KeyPath="yes" /></Component>
+      <Component Id="bmiintrin.h" Guid="17C66D2C-A9C8-4ADB-A55E-47BD0CF65A37"><File Id="bmiintrin.h" Name="bmiintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\bmiintrin.h" KeyPath="yes" /></Component>
+      <Component Id="cpuid.h" Guid="308D12C8-BED0-45A2-BE0C-21DA1F8C34EC"><File Id="cpuid.h" Name="cpuid.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\cpuid.h" KeyPath="yes" /></Component>
+      <Component Id="cuda_builtin_vars.h" Guid="6157CABF-4209-43B6-BC6F-B76764D68748"><File Id="cuda_builtin_vars.h" Name="cuda_builtin_vars.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\cuda_builtin_vars.h" KeyPath="yes" /></Component>
+      <Component Id="emmintrin.h" Guid="56C23126-7FD1-4E3B-9316-A369793EF501"><File Id="emmintrin.h" Name="emmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\emmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="f16cintrin.h" Guid="7F3928CE-8337-4C4C-BCA8-7A2EC7A995D9"><File Id="f16cintrin.h" Name="f16cintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\f16cintrin.h" KeyPath="yes" /></Component>
+      <Component Id="float.h" Guid="8329A8AB-39AB-40E4-B868-22A78479D4D3"><File Id="float.h" Name="float.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\float.h" KeyPath="yes" /></Component>
+      <Component Id="fma4intrin.h" Guid="6C769BC8-F968-45DB-8071-39E3612D3362"><File Id="fma4intrin.h" Name="fma4intrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\fma4intrin.h" KeyPath="yes" /></Component>
+      <Component Id="fmaintrin.h" Guid="53D6F126-4E3A-40C3-B10B-F7FED4734B4C"><File Id="fmaintrin.h" Name="fmaintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\fmaintrin.h" KeyPath="yes" /></Component>
+      <Component Id="fxsrintrin.h" Guid="1521BB20-B04A-4793-903E-69AFE91A9151"><File Id="fxsrintrin.h" Name="fxsrintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\fxsrintrin.h" KeyPath="yes" /></Component>
+      <Component Id="htmintrin.h" Guid="AC356485-ED91-469B-97B9-565530AED896"><File Id="htmintrin.h" Name="htmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\htmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="htmxlintrin.h" Guid="F1B5E672-7E64-428B-BFE9-6C7AF20FD216"><File Id="htmxlintrin.h" Name="htmxlintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\htmxlintrin.h" KeyPath="yes" /></Component>
+      <Component Id="ia32intrin.h" Guid="9FCEE7C4-6AFC-4063-A1F4-6093D5FAB205"><File Id="ia32intrin.h" Name="ia32intrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\ia32intrin.h" KeyPath="yes" /></Component>
+      <Component Id="immintrin.h" Guid="28401C38-0BCF-45CA-9685-F4094C7B8137"><File Id="immintrin.h" Name="immintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\immintrin.h" KeyPath="yes" /></Component>
+      <Component Id="Intrin.h" Guid="D6DC1EA8-AFC5-42B6-8A61-CE8E2A2090EF"><File Id="Intrin.h" Name="Intrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\Intrin.h" KeyPath="yes" /></Component>
+      <Component Id="inttypes.h" Guid="CBCF7EEF-09B7-4C3E-AD55-C09F6050C431"><File Id="inttypes.h" Name="inttypes.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\inttypes.h" KeyPath="yes" /></Component>
+      <Component Id="iso646.h" Guid="5C96C3F0-53CA-4512-A25C-BA32A93A04C5"><File Id="iso646.h" Name="iso646.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\iso646.h" KeyPath="yes" /></Component>
+      <Component Id="limits.h" Guid="44A2D332-0DA3-4DFF-8E19-515DD8C6F979"><File Id="limits.h" Name="limits.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\limits.h" KeyPath="yes" /></Component>
+      <Component Id="lzcntintrin.h" Guid="2C581D22-C3DE-4CE8-9686-09660897E4B7"><File Id="lzcntintrin.h" Name="lzcntintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\lzcntintrin.h" KeyPath="yes" /></Component>
+      <Component Id="mm_malloc.h" Guid="4AF10BA3-730D-46F4-BB08-FF2711D56717"><File Id="mm_malloc.h" Name="mm_malloc.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\mm_malloc.h" KeyPath="yes" /></Component>
+      <Component Id="mm3dnow.h" Guid="B39E0798-ED12-4322-883B-F44EDFCAA3FD"><File Id="mm3dnow.h" Name="mm3dnow.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\mm3dnow.h" KeyPath="yes" /></Component>
+      <Component Id="mmintrin.h" Guid="F54F3A98-2B9D-47C6-9D49-AC93BDD0DAEB"><File Id="mmintrin.h" Name="mmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\mmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="module.modulemap" Guid="1B537084-786D-478D-9CF0-ABA0F8C7158A"><File Id="module.modulemap" Name="module.modulemap" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\module.modulemap" KeyPath="yes" /></Component>
+      <Component Id="nmmintrin.h" Guid="A2CDC3C7-6501-4E88-BA11-2CE82F5B3A9C"><File Id="nmmintrin.h" Name="nmmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\nmmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="pmmintrin.h" Guid="4D550DA8-305A-4D2D-B3BE-093CE706BC3A"><File Id="pmmintrin.h" Name="pmmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\pmmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="popcntintrin.h" Guid="022760C6-F42D-43D5-AB56-99AF5836E8FB"><File Id="popcntintrin.h" Name="popcntintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\popcntintrin.h" KeyPath="yes" /></Component>
+      <Component Id="prfchwintrin.h" Guid="78525C2C-98FD-422D-9DC6-3F6ECFD7922C"><File Id="prfchwintrin.h" Name="prfchwintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\prfchwintrin.h" KeyPath="yes" /></Component>
+      <Component Id="rdseedintrin.h" Guid="05690D79-316E-4CC6-ABD4-86ABFE8D754F"><File Id="rdseedintrin.h" Name="rdseedintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\rdseedintrin.h" KeyPath="yes" /></Component>
+      <Component Id="rtmintrin.h" Guid="9100AA28-9D50-4319-A09D-FE222F641EE2"><File Id="rtmintrin.h" Name="rtmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\rtmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="s390intrin.h" Guid="C93391B6-98C8-4386-A7DE-A0F363EDF1B6"><File Id="s390intrin.h" Name="s390intrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\s390intrin.h" KeyPath="yes" /></Component>
+      <Component Id="shaintrin.h" Guid="DBA4BBE8-AAA4-429B-8361-B68D38894851"><File Id="shaintrin.h" Name="shaintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\shaintrin.h" KeyPath="yes" /></Component>
+      <Component Id="smmintrin.h" Guid="38B8D687-2BC8-4685-BE32-BE144F24F458"><File Id="smmintrin.h" Name="smmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\smmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="stdalign.h" Guid="F26259F8-7007-4AC7-8738-1E0F5A5E8FEB"><File Id="stdalign.h" Name="stdalign.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\stdalign.h" KeyPath="yes" /></Component>
+      <Component Id="stdarg.h" Guid="2FDC5CB0-F7C0-413C-AFFC-24CBF4E369B2"><File Id="stdarg.h" Name="stdarg.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\stdarg.h" KeyPath="yes" /></Component>
+      <Component Id="stdatomic.h" Guid="D9FB4FAB-BCE8-4BAC-A873-E58943976F4F"><File Id="stdatomic.h" Name="stdatomic.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\stdatomic.h" KeyPath="yes" /></Component>
+      <Component Id="stdbool.h" Guid="07115C4B-1FC3-4329-B9A2-6E6A427ADADD"><File Id="stdbool.h" Name="stdbool.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\stdbool.h" KeyPath="yes" /></Component>
+      <Component Id="stddef.h" Guid="5E8EF04B-44E0-43CA-8D3B-28FB67B35E91"><File Id="stddef.h" Name="stddef.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\stddef.h" KeyPath="yes" /></Component>
+      <Component Id="stdint.h" Guid="9EFAF01F-F1FA-479B-92C7-9A090E5AEE92"><File Id="stdint.h" Name="stdint.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\stdint.h" KeyPath="yes" /></Component>
+      <Component Id="stdnoreturn.h" Guid="68DBBEDA-A0F8-4BA1-8DA6-57D28AE0174B"><File Id="stdnoreturn.h" Name="stdnoreturn.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\stdnoreturn.h" KeyPath="yes" /></Component>
+      <Component Id="tbmintrin.h" Guid="62C80718-FCEB-47E0-8A2E-F0B67A045759"><File Id="tbmintrin.h" Name="tbmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\tbmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="tgmath.h" Guid="ACF2A78B-8B88-4501-8150-AB68F46799F3"><File Id="tgmath.h" Name="tgmath.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\tgmath.h" KeyPath="yes" /></Component>
+      <Component Id="tmmintrin.h" Guid="A96AC39D-DC31-4937-902E-CA763C8A19E8"><File Id="tmmintrin.h" Name="tmmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\tmmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="unwind.h" Guid="01CB7349-B23B-42C5-ACC1-857AF4EAD30A"><File Id="unwind.h" Name="unwind.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\unwind.h" KeyPath="yes" /></Component>
+      <Component Id="vadefs.h" Guid="1A4480F9-6DCC-48A5-BB3D-E2FEA6976FD7"><File Id="vadefs.h" Name="vadefs.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\vadefs.h" KeyPath="yes" /></Component>
+      <Component Id="varargs.h" Guid="8DD76186-910F-4D0A-9362-832ACF4106E6"><File Id="varargs.h" Name="varargs.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\varargs.h" KeyPath="yes" /></Component>
+      <Component Id="vecintrin.h" Guid="8228E2FF-238C-4930-9388-11C79D4C373A"><File Id="vecintrin.h" Name="vecintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\vecintrin.h" KeyPath="yes" /></Component>
+      <Component Id="wmmintrin.h" Guid="F18F31F3-31FF-4CF0-A49B-41D0C352E9B1"><File Id="wmmintrin.h" Name="wmmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\wmmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="x86intrin.h" Guid="FB2C49AD-4156-40ED-B69C-E4B8AB9BCDF8"><File Id="x86intrin.h" Name="x86intrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\x86intrin.h" KeyPath="yes" /></Component>
+      <Component Id="xmmintrin.h" Guid="3119942A-504F-4F37-8D6A-6222ECC9E3D6"><File Id="xmmintrin.h" Name="xmmintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\xmmintrin.h" KeyPath="yes" /></Component>
+      <Component Id="xopintrin.h" Guid="B98D7EEF-4F08-485F-B898-EC7F6A46198C"><File Id="xopintrin.h" Name="xopintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\xopintrin.h" KeyPath="yes" /></Component>
+      <Component Id="xtestintrin.h" Guid="FF2F6B51-0A35-4B7A-82F4-92B3A852BF14"><File Id="xtestintrin.h" Name="xtestintrin.h" DiskId="1" Source="SourceFiles\lib\seec\resources\clang\3.7.0\include\xtestintrin.h" KeyPath="yes" /></Component>
+    </DirectoryRef>
+
+    <!-- features -->
+    <Feature Id="Complete" Level="1"
+      Title="SeeC 0.26" Description="Complete SeeC installation." Display="expand"
+      ConfigurableDirectory="APPLICATIONROOTDIRECTORY">
+      
+      <!-- compiler and linker -->
+      <Feature Id="CompilerLinker" Title="Compiler" Description="The SeeC compiler." Level="1"
+        AllowAdvertise="no" InstallDefault="local" Absent="allow">
+        <ComponentRef Id="seec_cc.exe" />
+        <ComponentRef Id="seec_ld.exe" />
+        <ComponentRef Id="libseecRuntimeTracer.dll" />
+        
+        <ComponentRef Id="libcurl_4.dll" />
+        <ComponentRef Id="LIBEAY32.dll" />
+        <ComponentRef Id="libexpat_1.dll" />
+        <ComponentRef Id="libffi_6.dll" />
+        <ComponentRef Id="libgcc_s_seh_1.dll" />
+        <ComponentRef Id="libgmp_10.dll" />
+        <ComponentRef Id="libgnutls_30.dll" />
+        <ComponentRef Id="libhogweed_4_0.dll" />
+        <ComponentRef Id="libiconv_2.dll" />
+        <ComponentRef Id="libicudt55.dll" />
+        <ComponentRef Id="libicuin55.dll" />
+        <ComponentRef Id="libicuuc55.dll" />
+        <ComponentRef Id="libidn_11.dll" />
+        <ComponentRef Id="libintl_8.dll" />
+        <ComponentRef Id="libnettle_6_0.dll" />
+        <ComponentRef Id="libp11_kit_0.dll" />
+        <ComponentRef Id="librtmp_1.dll" />
+        <ComponentRef Id="libssh2_1.dll" />
+        <ComponentRef Id="libstdc___6.dll" />
+        <ComponentRef Id="libtasn1_6.dll" />
+        <ComponentRef Id="libwinpthread_1.dll" />
+        <ComponentRef Id="SSLEAY32.dll" />
+        <ComponentRef Id="zlib1.dll" />
+        
+        <ComponentRef Id="ClangEPV.dat" />
+        <ComponentRef Id="RuntimeErrors.dat" />
+        <ComponentRef Id="SeeCClang.dat" />
+        <ComponentRef Id="Trace.dat" />
+        <ComponentRef Id="TraceViewer.dat" />
+
+        <!-- clang headers -->
+        <ComponentRef Id="__stddef_max_align_t.h" />
+        <ComponentRef Id="__wmmintrin_aes.h" />
+        <ComponentRef Id="__wmmintrin_pclmul.h" />
+        <ComponentRef Id="adxintrin.h" />
+        <ComponentRef Id="altivec.h" />
+        <ComponentRef Id="ammintrin.h" />
+        <ComponentRef Id="arm_acle.h" />
+        <ComponentRef Id="arm_neon.h" />
+        <ComponentRef Id="avx2intrin.h" />
+        <ComponentRef Id="avx512bwintrin.h" />
+        <ComponentRef Id="avx512cdintrin.h" />
+        <ComponentRef Id="avx512dqintrin.h" />
+        <ComponentRef Id="avx512erintrin.h" />
+        <ComponentRef Id="avx512fintrin.h" />
+        <ComponentRef Id="avx512vlbwintrin.h" />
+        <ComponentRef Id="avx512vldqintrin.h" />
+        <ComponentRef Id="avx512vlintrin.h" />
+        <ComponentRef Id="avxintrin.h" />
+        <ComponentRef Id="bmi2intrin.h" />
+        <ComponentRef Id="bmiintrin.h" />
+        <ComponentRef Id="cpuid.h" />
+        <ComponentRef Id="cuda_builtin_vars.h" />
+        <ComponentRef Id="emmintrin.h" />
+        <ComponentRef Id="f16cintrin.h" />
+        <ComponentRef Id="float.h" />
+        <ComponentRef Id="fma4intrin.h" />
+        <ComponentRef Id="fmaintrin.h" />
+        <ComponentRef Id="fxsrintrin.h" />
+        <ComponentRef Id="htmintrin.h" />
+        <ComponentRef Id="htmxlintrin.h" />
+        <ComponentRef Id="ia32intrin.h" />
+        <ComponentRef Id="immintrin.h" />
+        <ComponentRef Id="Intrin.h" />
+        <ComponentRef Id="inttypes.h" />
+        <ComponentRef Id="iso646.h" />
+        <ComponentRef Id="limits.h" />
+        <ComponentRef Id="lzcntintrin.h" />
+        <ComponentRef Id="mm_malloc.h" />
+        <ComponentRef Id="mm3dnow.h" />
+        <ComponentRef Id="mmintrin.h" />
+        <ComponentRef Id="module.modulemap" />
+        <ComponentRef Id="nmmintrin.h" />
+        <ComponentRef Id="pmmintrin.h" />
+        <ComponentRef Id="popcntintrin.h" />
+        <ComponentRef Id="prfchwintrin.h" />
+        <ComponentRef Id="rdseedintrin.h" />
+        <ComponentRef Id="rtmintrin.h" />
+        <ComponentRef Id="s390intrin.h" />
+        <ComponentRef Id="shaintrin.h" />
+        <ComponentRef Id="smmintrin.h" />
+        <ComponentRef Id="stdalign.h" />
+        <ComponentRef Id="stdarg.h" />
+        <ComponentRef Id="stdatomic.h" />
+        <ComponentRef Id="stdbool.h" />
+        <ComponentRef Id="stddef.h" />
+        <ComponentRef Id="stdint.h" />
+        <ComponentRef Id="stdnoreturn.h" />
+        <ComponentRef Id="tbmintrin.h" />
+        <ComponentRef Id="tgmath.h" />
+        <ComponentRef Id="tmmintrin.h" />
+        <ComponentRef Id="unwind.h" />
+        <ComponentRef Id="vadefs.h" />
+        <ComponentRef Id="varargs.h" />
+        <ComponentRef Id="vecintrin.h" />
+        <ComponentRef Id="wmmintrin.h" />
+        <ComponentRef Id="x86intrin.h" />
+        <ComponentRef Id="xmmintrin.h" />
+        <ComponentRef Id="xopintrin.h" />
+        <ComponentRef Id="xtestintrin.h" />
+      </Feature>
+      
+      <!-- trace viewer -->
+      <Feature Id="TraceViewer" Title="Trace viewer" Description="The SeeC trace viewer." Level="1"
+        AllowAdvertise="no" InstallDefault="local" Absent="allow">
+        <ComponentRef Id="ProgramMenuDir" />
+        <ComponentRef Id="seec_view.exe" />
+        
+        <ComponentRef Id="libcurl_4.dll" />
+        <ComponentRef Id="LIBEAY32.dll" />
+        <ComponentRef Id="libexpat_1.dll" />
+        <ComponentRef Id="libffi_6.dll" />
+        <ComponentRef Id="libgcc_s_seh_1.dll" />
+        <ComponentRef Id="libgmp_10.dll" />
+        <ComponentRef Id="libgnutls_30.dll" />
+        <ComponentRef Id="libhogweed_4_0.dll" />
+        <ComponentRef Id="libiconv_2.dll" />
+        <ComponentRef Id="libicudt55.dll" />
+        <ComponentRef Id="libicuin55.dll" />
+        <ComponentRef Id="libicuuc55.dll" />
+        <ComponentRef Id="libidn_11.dll" />
+        <ComponentRef Id="libintl_8.dll" />
+        <ComponentRef Id="libnettle_6_0.dll" />
+        <ComponentRef Id="libp11_kit_0.dll" />
+        <ComponentRef Id="librtmp_1.dll" />
+        <ComponentRef Id="libssh2_1.dll" />
+        <ComponentRef Id="libstdc___6.dll" />
+        <ComponentRef Id="libtasn1_6.dll" />
+        <ComponentRef Id="libwinpthread_1.dll" />
+        <ComponentRef Id="SSLEAY32.dll" />
+        <ComponentRef Id="zlib1.dll" />
+        
+        <ComponentRef Id="ClangEPV.dat" />
+        <ComponentRef Id="RuntimeErrors.dat" />
+        <ComponentRef Id="SeeCClang.dat" />
+        <ComponentRef Id="Trace.dat" />
+        <ComponentRef Id="TraceViewer.dat" />
+      </Feature>
+    </Feature>
+
+    <UIRef Id="WixUI_FeatureTree" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+    
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+
+    <Icon Id="seec.ico" SourceFile="seec.ico" />
+  </Product>
+</Wix>
