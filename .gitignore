@@ -3,3 +3,5 @@
 seec.msi
 seec.wixobj
 seec.wixpdb
+seec_*.msi
+seec_*.wixpdb
