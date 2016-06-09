@@ -93,14 +93,15 @@
       <Component Id="libgcc_s_seh_1.dll" Guid="B6F12663-0CAF-4C34-A18C-2FF292528A82"><File Id="libgcc_s_seh_1.dll" Name="libgcc_s_seh-1.dll" DiskId="1" Source="SourceFiles\bin\libgcc_s_seh-1.dll" KeyPath="yes" /></Component>
       <Component Id="libgmp_10.dll" Guid="79DCA6F9-8470-434F-8201-B8EB797C9499"><File Id="libgmp_10.dll" Name="libgmp-10.dll" DiskId="1" Source="SourceFiles\bin\libgmp-10.dll" KeyPath="yes" /></Component>
       <Component Id="libgnutls_30.dll" Guid="AB414C48-23BD-4206-928F-7E56B28E8A30"><File Id="libgnutls_30.dll" Name="libgnutls-30.dll" DiskId="1" Source="SourceFiles\bin\libgnutls-30.dll" KeyPath="yes" /></Component>
-      <Component Id="libhogweed_4_0.dll" Guid="96CDC0EA-14D6-4989-A6A2-C65A77A809D4"><File Id="libhogweed_4_0.dll" Name="libhogweed-4-0.dll" DiskId="1" Source="SourceFiles\bin\libhogweed-4-0.dll" KeyPath="yes" /></Component>
+      <Component Id="libhogweed_4_2.dll" Guid="*"><File Id="libhogweed_4_2.dll" Name="libhogweed-4-2.dll" DiskId="1" Source="SourceFiles\bin\libhogweed-4-2.dll" KeyPath="yes" /></Component>
       <Component Id="libiconv_2.dll" Guid="0402FA2E-6135-403D-83E6-4AEA3D163951"><File Id="libiconv_2.dll" Name="libiconv-2.dll" DiskId="1" Source="SourceFiles\bin\libiconv-2.dll" KeyPath="yes" /></Component>
-      <Component Id="libicudt55.dll" Guid="769BC8A6-0A67-4091-AD93-5E63CF57C96C"><File Id="libicudt55.dll" Name="libicudt55.dll" DiskId="1" Source="SourceFiles\bin\libicudt55.dll" KeyPath="yes" /></Component>
-      <Component Id="libicuin55.dll" Guid="BE3257D3-F512-4DBA-9F94-761AC3D7C8AD"><File Id="libicuin55.dll" Name="libicuin55.dll" DiskId="1" Source="SourceFiles\bin\libicuin55.dll" KeyPath="yes" /></Component>
-      <Component Id="libicuuc55.dll" Guid="5C8D0508-30DB-4759-BC45-8E2A9A215BCF"><File Id="libicuuc55.dll" Name="libicuuc55.dll" DiskId="1" Source="SourceFiles\bin\libicuuc55.dll" KeyPath="yes" /></Component>
+      <Component Id="libicudt56.dll" Guid="*"><File Id="libicudt56.dll" Name="libicudt56.dll" DiskId="1" Source="SourceFiles\bin\libicudt56.dll" KeyPath="yes" /></Component>
+      <Component Id="libicuin56.dll" Guid="*"><File Id="libicuin56.dll" Name="libicuin56.dll" DiskId="1" Source="SourceFiles\bin\libicuin56.dll" KeyPath="yes" /></Component>
+      <Component Id="libicuuc56.dll" Guid="*"><File Id="libicuuc56.dll" Name="libicuuc56.dll" DiskId="1" Source="SourceFiles\bin\libicuuc56.dll" KeyPath="yes" /></Component>
       <Component Id="libidn_11.dll" Guid="4FFEEF6A-52C7-480B-B704-B296A162543B"><File Id="libidn_11.dll" Name="libidn-11.dll" DiskId="1" Source="SourceFiles\bin\libidn-11.dll" KeyPath="yes" /></Component>
       <Component Id="libintl_8.dll" Guid="91A0ADEB-1C29-43B8-B124-1041CB3DE85D"><File Id="libintl_8.dll" Name="libintl-8.dll" DiskId="1" Source="SourceFiles\bin\libintl-8.dll" KeyPath="yes" /></Component>
-      <Component Id="libnettle_6_0.dll" Guid="E6EFF209-E536-452C-A0B9-E31048ACD821"><File Id="libnettle_6_0.dll" Name="libnettle-6-0.dll" DiskId="1" Source="SourceFiles\bin\libnettle-6-0.dll" KeyPath="yes" /></Component>
+      <Component Id="libnettle_6_2.dll" Guid="*"><File Id="libnettle_6_2.dll" Name="libnettle-6-2.dll" DiskId="1" Source="SourceFiles\bin\libnettle-6-2.dll" KeyPath="yes" /></Component>
+      <Component Id="libnghttp2_14.dll" Guid="*"><File Id="libnghttp2_14.dll" Name="libnghttp2-14.dll" DiskId="1" Source="SourceFiles\bin\libnghttp2-14.dll" KeyPath="yes" /></Component>
       <Component Id="libp11_kit_0.dll" Guid="E5B7CAC5-38C1-4F51-9D25-7F4895EA067B"><File Id="libp11_kit_0.dll" Name="libp11-kit-0.dll" DiskId="1" Source="SourceFiles\bin\libp11-kit-0.dll" KeyPath="yes" /></Component>
       <Component Id="librtmp_1.dll" Guid="D248DA4F-BD16-4A32-A1EC-BD1A576A0149"><File Id="librtmp_1.dll" Name="librtmp-1.dll" DiskId="1" Source="SourceFiles\bin\librtmp-1.dll" KeyPath="yes" /></Component>
       <Component Id="libseecRuntimeTracer.dll" Guid="9E33B05C-BDD5-42C9-B047-993BB9541391"><File Id="libseecRuntimeTracer.dll" Name="libseecRuntimeTracer.dll" DiskId="1" Source="SourceFiles\bin\libseecRuntimeTracer.dll" KeyPath="yes" /></Component>
@@ -218,14 +219,15 @@
         <ComponentRef Id="libgcc_s_seh_1.dll" />
         <ComponentRef Id="libgmp_10.dll" />
         <ComponentRef Id="libgnutls_30.dll" />
-        <ComponentRef Id="libhogweed_4_0.dll" />
+        <ComponentRef Id="libhogweed_4_2.dll" />
         <ComponentRef Id="libiconv_2.dll" />
-        <ComponentRef Id="libicudt55.dll" />
-        <ComponentRef Id="libicuin55.dll" />
-        <ComponentRef Id="libicuuc55.dll" />
+        <ComponentRef Id="libicudt56.dll" />
+        <ComponentRef Id="libicuin56.dll" />
+        <ComponentRef Id="libicuuc56.dll" />
         <ComponentRef Id="libidn_11.dll" />
         <ComponentRef Id="libintl_8.dll" />
-        <ComponentRef Id="libnettle_6_0.dll" />
+        <ComponentRef Id="libnettle_6_2.dll" />
+        <ComponentRef Id="libnghttp2_14.dll" />
         <ComponentRef Id="libp11_kit_0.dll" />
         <ComponentRef Id="librtmp_1.dll" />
         <ComponentRef Id="libssh2_1.dll" />
@@ -332,14 +334,15 @@
         <ComponentRef Id="libgcc_s_seh_1.dll" />
         <ComponentRef Id="libgmp_10.dll" />
         <ComponentRef Id="libgnutls_30.dll" />
-        <ComponentRef Id="libhogweed_4_0.dll" />
+        <ComponentRef Id="libhogweed_4_2.dll" />
         <ComponentRef Id="libiconv_2.dll" />
-        <ComponentRef Id="libicudt55.dll" />
-        <ComponentRef Id="libicuin55.dll" />
-        <ComponentRef Id="libicuuc55.dll" />
+        <ComponentRef Id="libicudt56.dll" />
+        <ComponentRef Id="libicuin56.dll" />
+        <ComponentRef Id="libicuuc56.dll" />
         <ComponentRef Id="libidn_11.dll" />
         <ComponentRef Id="libintl_8.dll" />
-        <ComponentRef Id="libnettle_6_0.dll" />
+        <ComponentRef Id="libnettle_6_2.dll" />
+        <ComponentRef Id="libnghttp2_14.dll" />
         <ComponentRef Id="libp11_kit_0.dll" />
         <ComponentRef Id="librtmp_1.dll" />
         <ComponentRef Id="libssh2_1.dll" />
